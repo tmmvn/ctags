@@ -28,7 +28,9 @@ jobs:
           echo "Fetch upstream...";
           git fetch upstream master;
           echo "Fetched. Rebase differences...";
-          git rebase $(git merge-base upstream/master @);
+          fork_point=$(git merge-base upstream/master origin/core);
+          echo $fork_point;
+          git rebase --onto upstream/master $fork_point origin/core;
           echo "Rebased. Configure bot...";
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com";
           git config --local user.name "github-actions[bot]";
