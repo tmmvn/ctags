@@ -34,4 +34,4 @@ jobs:
           echo $fork_point;
           git rebase --onto upstream/master $fork_point origin/core;
           echo "Rebased. Push to origin...";
-          git push --force-with-lease origin $(git branch --show-current);
+          git push --force-with-lease origin HEAD:core;
