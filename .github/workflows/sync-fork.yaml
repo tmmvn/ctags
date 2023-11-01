@@ -22,8 +22,8 @@ jobs:
           fi;
           echo $UPSTREAM
           git remote add upstream $UPSTREAM;
-          git fetch upstream;
-          git rebase `git merge-base upstream/master HEAD`;
+          git fetch upstream/master;
+          git rebase `git merge-base upstream/master core`;
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com";
           git config --local user.name "github-actions[bot]";
           git push --force-with-lease origin core;
