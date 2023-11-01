@@ -20,14 +20,14 @@ jobs:
           if [ ! $(echo $UPSTREAM | egrep '^(http|git@)') ]; then
             UPSTREAM=https://github.com/$UPSTREAM.git
           fi;
-          echo $UPSTREAM
+          echo $UPSTREAM;
           git remote add upstream $UPSTREAM;
-          echo "Fetch: upstream"
+          echo "Fetch upstream...";
           git fetch upstream master;
-          echo "Fetched. Rebase differences."
-          git rebase `git merge-base upstream/master core`;
-          echo "Rebased. Configure bot."
+          echo "Fetched. Rebase differences...";
+          git rebase $(git merge-base upstream/master origin/core);
+          echo "Rebased. Configure bot...";
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com";
           git config --local user.name "github-actions[bot]";
-          echo "Configured. Push to origin."
-          git push --force-with-lease origin core;
+          echo "Configured. Push to origin...";
+          git push --force-with-lease origin $(git branch --show-current);
